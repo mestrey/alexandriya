@@ -75,7 +75,9 @@ $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
 ]);
 
-$app->routeMiddleware([]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\AuthMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -110,5 +112,7 @@ $app->router->group([
         require __DIR__ . '/../routes/web.php';
     });
 });
+
+app()->setLocale(env('APP_LOCAL'));
 
 return $app;
