@@ -29,6 +29,10 @@ export namespace ApiService {
         public login(data: object) {
             return this.fetch('login', 'POST', data);
         }
+
+        public register(data: object) {
+            return this.fetch('register', 'POST', data);
+        }
     }
 }
 
