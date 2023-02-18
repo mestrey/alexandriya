@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\Authentication\AccountNotFoundException;
+use App\Exceptions\Authentication\UnauthorizedException;
 use App\Repositories\AuthAccessRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\UnauthorizedException;
 use Laravel\Lumen\Routing\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthenticationController extends Controller
 {
@@ -46,7 +46,7 @@ class AuthenticationController extends Controller
         ]);
 
         $user = $this->userRepository->getByUsername($data['username']) ??
-            throw new NotFoundHttpException();
+            throw new AccountNotFoundException();
 
         if (!Hash::check($data['password'], $user->getPassword())) {
             throw new UnauthorizedException();

@@ -10,6 +10,10 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        app()->instance(
+            'exceptionsMessages',
+            include(app()->langPath() . '/' . app()->getLocale() . '/exceptions.php')
+        );
     }
 
     public function register()

@@ -2,6 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\Authentication\TokenExpiredException;
+use App\Exceptions\Authentication\TokenInvalidException;
+use App\Exceptions\Authentication\TokenNotFoundException;
+use App\Exceptions\Authentication\TokenValidException;
 use App\Models\AuthAccess;
 use App\Services\AuthAccessServiceInterface;
 use Illuminate\Support\Collection;
@@ -63,8 +67,7 @@ class AuthAccessRepository implements AuthAccessRepositoryInterface
         $authAccess = AuthAccess::where('token', $token)->first();
 
         if (empty($authAccess)) {
-            // throw new InvalidTokenException();
-            throw new \Exception();
+            throw new TokenInvalidException();
         }
 
         return $authAccess->delete();
@@ -78,8 +81,7 @@ class AuthAccessRepository implements AuthAccessRepositoryInterface
         $ifOnlyOneExist = function (?AuthAccess $a, ?AuthAccess $b) {
             if (empty($a) && !empty($b)) {
                 $b->delete();
-                // throw new InvalidTokenException();
-                throw new \Exception();
+                throw new TokenInvalidException();
             }
         };
 
@@ -87,15 +89,13 @@ class AuthAccessRepository implements AuthAccessRepositoryInterface
         $ifOnlyOneExist($authAccessByRefreshToken, $authAccessByToken);
 
         if (empty($authAccessByToken) && empty($authAccessByRefreshToken)) {
-            // throw new NotFoundTokenException();
-            throw new \Exception();
+            throw new TokenNotFoundException();
         }
 
         if (!$authAccessByToken->is($authAccessByRefreshToken)) {
             $authAccessByToken->delete();
             $authAccessByRefreshToken->delete();
-            // throw new InvalidTokenException();
-            throw new \Exception();
+            throw new TokenInvalidException();
         }
 
         return $authAccessByToken;
@@ -110,8 +110,7 @@ class AuthAccessRepository implements AuthAccessRepositoryInterface
         try {
             $this->authAccessService->validateToken($token);
         } catch (\Exception $e) {
-            // if (!$e instanceof ExpiredTokenException) {
-            if (!$e instanceof \Exception) {
+            if (!$e instanceof TokenExpiredException) {
                 throw $e;
             } else {
                 $tokenExpired = true;
@@ -119,8 +118,7 @@ class AuthAccessRepository implements AuthAccessRepositoryInterface
         }
 
         if (!$tokenExpired) {
-            // throw new ValidTokenException();
-            throw new \Exception();
+            throw new TokenValidException();
         }
 
         $this->authAccessService->validateRefreshToken($refreshToken);

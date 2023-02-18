@@ -113,4 +113,6 @@ $app->router->group([
     });
 });
 
+app()->setLocale(env('APP_LOCAL'));
+
 return $app;

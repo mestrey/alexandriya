@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\Authentication\TokenExpiredException;
+use App\Exceptions\Authentication\TokenInvalidException;
+
 class AuthAccessService implements AuthAccessServiceInterface
 {
     private const HASHING_ALG = 'sha256';
@@ -104,8 +107,7 @@ class AuthAccessService implements AuthAccessServiceInterface
         $parts = explode('.', $token);
 
         if (count($parts) !== 3) {
-            throw new \Exception();
-            // throw new InvalidTokenException();
+            throw new TokenInvalidException();
         }
 
         return $parts;
@@ -129,13 +131,11 @@ class AuthAccessService implements AuthAccessServiceInterface
         $createdSignature = $this->getTokenSign($encodedHeader, $encodedPayload, $secret);
 
         if ($signature !== $createdSignature) {
-            throw new \Exception();
-            // throw new InvalidTokenException();
+            throw new TokenInvalidException();
         }
 
         if (time() > $this->decodeData($encodedPayload)['exp']) {
-            throw new \Exception();
-            // throw new ExpiredTokenException();
+            throw new TokenExpiredException();
         }
 
         return true;
