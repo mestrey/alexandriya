@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
 
         $this->app->singleton(OmdbApiServiceInterface::class, function () {
-            return new OmdbApiService(env('OMDB_API_KEY'),);
+            return new OmdbApiService(env('OMDB_API_KEY'));
         });
     }
 }

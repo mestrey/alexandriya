@@ -16,9 +16,10 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->group(['prefix' => 'user'], function () use ($router) {
-        $router->get('{id}', 'UserController@show');
+        $router->get('show', 'UserController@show');
     });
 
     $router->group(['prefix' => 'movie'], function () use ($router) {
+        $router->get('search/{query}', 'MovieController@search');
     });
 });

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\Authentication\AccountNotFoundException;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
 
 class UserController extends Controller
@@ -13,11 +13,8 @@ class UserController extends Controller
     ) {
     }
 
-    public function show(int $id)
+    public function show(Request $request)
     {
-        $user = $this->userRepository->getById($id) ??
-            throw new AccountNotFoundException();
-
-        return $user->toJson();
+        return $request->user->toJson();
     }
 }
