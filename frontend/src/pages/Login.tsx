@@ -5,13 +5,20 @@ const Login: Component = () => {
     const [getUsername, setUsername] = createSignal('');
     const [getPassword, setPassword] = createSignal('');
 
-    const formSubmit = (event: Event) => {
+    const formSubmit = async (event: Event) => {
         event.preventDefault();
 
-        AuthenticationService.login({
+        const response = await AuthenticationService.login({
             username: getUsername(),
             password: getPassword(),
         });
+
+        if (response === true) {
+            console.log('good', response);
+            // window.location.href = '/';
+        } else {
+            console.log('err', response);
+        }
     };
 
     return (

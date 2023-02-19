@@ -6,14 +6,21 @@ const Register: Component = () => {
     const [getEmail, setEmail] = createSignal('');
     const [getPassword, setPassword] = createSignal('');
 
-    const formSubmit = (event: Event) => {
+    const formSubmit = async (event: Event) => {
         event.preventDefault();
 
-        AuthenticationService.register({
+        const response = await AuthenticationService.register({
             username: getUsername(),
             email: getEmail(),
             password: getPassword(),
         });
+
+        if (response === true) {
+            console.log('good', response);
+            // window.location.href = '/';
+        } else {
+            console.log('err', response);
+        }
     };
 
     return (

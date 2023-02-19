@@ -3,7 +3,7 @@ import { Component } from "solid-js";
 const Home: Component = () => {
     return (
         <div>
-            <p>hello</p>
+            <h1>Home</h1>
         </div>
     );
 };

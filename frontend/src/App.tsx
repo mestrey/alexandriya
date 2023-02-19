@@ -1,4 +1,4 @@
-import { Route, Routes } from '@solidjs/router';
+import { Route, Routes, Navigate } from '@solidjs/router';
 import type { Component } from 'solid-js';
 
 import Home from './pages/Home';
@@ -12,8 +12,14 @@ const App: Component = () => {
             <Routes>
                 <Route path='*' element={<NotFound />}></Route>
                 <Route path='/' element={<Home />}></Route>
+
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
+                <Route path='/logout' element={<Navigate href={({ }) => {
+                    // logout
+
+                    return '/';
+                }} />}></Route>
             </Routes>
         </div>
     );
