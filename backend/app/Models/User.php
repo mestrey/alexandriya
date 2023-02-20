@@ -25,4 +25,9 @@ class User extends Model
     {
         return $this->attributes['password'];
     }
+
+    public function getFavorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

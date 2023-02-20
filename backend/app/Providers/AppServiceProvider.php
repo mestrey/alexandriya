@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\FavoriteRepository;
+use App\Repositories\FavoriteRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryInterface;
 use App\Services\OmdbApiService;
@@ -21,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
-
+        $this->app->singleton(FavoriteRepositoryInterface::class, FavoriteRepository::class);
         $this->app->singleton(OmdbApiServiceInterface::class, function () {
             return new OmdbApiService(env('OMDB_API_KEY'));
         });

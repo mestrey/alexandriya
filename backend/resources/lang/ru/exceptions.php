@@ -8,5 +8,7 @@ return [
     'token_expired' => 'RU Token expired.',
     'token_valid' => 'RU Token still valid.',
 
+    'favorite_not_found' => 'RU Favorite movie not found.',
+
     'unauthorized' => 'RU Unauthorized.',
 ];

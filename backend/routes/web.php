@@ -22,4 +22,9 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->group(['prefix' => 'movie'], function () use ($router) {
         $router->get('search/{query}', 'MovieController@search');
     });
+
+    $router->group(['prefix' => 'fav'], function () use ($router) {
+        $router->post('create', 'FavoriteController@create');
+        $router->get('destroy/{id}', 'FavoriteController@destroy');
+    });
 });
