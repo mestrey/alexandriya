@@ -12,8 +12,8 @@ return new class extends Migration
         Schema::create('auth_accesses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->string('token')->unique();
-            $table->string('refresh_token')->unique();
+            $table->string('token', 767)->unique();
+            $table->string('refresh_token', 767)->unique();
             $table->timestamps();
         });
     }
