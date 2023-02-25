@@ -1,4 +1,4 @@
-import { SERVER_API_URL } from "../utils/constants";
+import { SERVER_API_URL } from '../utils/constants';
 
 class HttpClientService {
     private serverApiUrl: string;

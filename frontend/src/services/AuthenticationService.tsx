@@ -1,4 +1,10 @@
-import { AUTH_SAVE_KEY } from "../utils/constants";
+import { AUTH_SAVE_KEY } from '../utils/constants';
+import HttpClientService from './HttpClientService';
+
+type Tokens = {
+    token: string,
+    refresh_token: string,
+};
 
 class AuthenticationService {
     private authSaveKey: string;
@@ -11,12 +17,20 @@ class AuthenticationService {
         return !!localStorage.getItem(this.authSaveKey);
     }
 
-    public getTokens(): object {
+    public getTokens(): Tokens {
         return JSON.parse(localStorage.getItem(this.authSaveKey)!);
     }
 
     public setTokens(tokens: object): void {
         return localStorage.setItem(this.authSaveKey, JSON.stringify(tokens));
+    }
+
+    public login(data: object): Promise<Response> {
+        return HttpClientService.post(['auth', 'login'], data);
+    }
+
+    public register(data: object): Promise<Response> {
+        return HttpClientService.post(['auth', 'register'], data);
     }
 }
 
