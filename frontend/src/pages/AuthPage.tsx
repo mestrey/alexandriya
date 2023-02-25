@@ -10,6 +10,8 @@ const AuthPage: Component = (props: any) => {
     const [getEmail, setEmail] = createSignal('');
     const [getPassword, setPassword] = createSignal('');
 
+    const [getError, setError] = createSignal('');
+
     const isLogin = props.type === AuthType.Login;
 
     const formSubmit = async (event: Event) => {
@@ -25,19 +27,16 @@ const AuthPage: Component = (props: any) => {
             AuthenticationService.login(data) :
             AuthenticationService.register(data));
 
-        console.log(response);
+        if (response.ok) {
+            const tokens = await response.text();
+            AuthenticationService.setTokens(JSON.parse(tokens));
 
-        // const response = await AuthenticationService.login({
-        //     username: getUsername(),
-        //     password: getPassword(),
-        // });
+            window.location.href = '/';
+        } else {
+            const errorResponse: any = await response.json();
 
-        // if (response === true) {
-        //     console.log('good', response);
-        //     // window.location.href = '/';
-        // } else {
-        //     console.log('err', response);
-        // }
+            setError(`Error code ${errorResponse.error.code}: ${errorResponse.error.message}`)
+        }
     };
 
 
@@ -66,6 +65,9 @@ const AuthPage: Component = (props: any) => {
                         type='password' id='password' value={getPassword()}
                         onChange={(e) => setPassword(e.currentTarget.value)}
                     />
+                </div>
+                <div>
+                    <p>{getError()}</p>
                 </div>
                 <div>
                     <button type="submit">

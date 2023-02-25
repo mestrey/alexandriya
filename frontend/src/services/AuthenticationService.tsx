@@ -22,7 +22,7 @@ class AuthenticationService {
     }
 
     public setTokens(tokens: object): void {
-        return localStorage.setItem(this.authSaveKey, JSON.stringify(tokens));
+        localStorage.setItem(this.authSaveKey, JSON.stringify(tokens));
     }
 
     public login(data: object): Promise<Response> {
@@ -31,6 +31,11 @@ class AuthenticationService {
 
     public register(data: object): Promise<Response> {
         return HttpClientService.post(['auth', 'register'], data);
+    }
+
+    public logout(): void {
+        HttpClientService.get(['auth', 'logout'], this.getTokens().token);
+        localStorage.removeItem(this.authSaveKey);
     }
 }
 
