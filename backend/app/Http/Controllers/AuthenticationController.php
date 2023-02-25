@@ -6,6 +6,7 @@ use App\Exceptions\Authentication\AccountNotFoundException;
 use App\Exceptions\Authentication\UnauthorizedException;
 use App\Repositories\AuthAccessRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Routing\Controller;
@@ -35,7 +36,7 @@ class AuthenticationController extends Controller
 
         $user = $this->userRepository->create($userData);
 
-        return $this->returnAuthAccess($user->getId(), $request->userAgent());
+        return new JsonResponse($this->returnAuthAccess($user->getId(), $request->userAgent()));
     }
 
     public function login(Request $request)
@@ -52,7 +53,7 @@ class AuthenticationController extends Controller
             throw new UnauthorizedException();
         }
 
-        return $this->returnAuthAccess($user->getId(), $request->userAgent());
+        return new JsonResponse($this->returnAuthAccess($user->getId(), $request->userAgent()));
     }
 
     public function refresh(Request $request)
@@ -64,13 +65,13 @@ class AuthenticationController extends Controller
 
         $newAuthAccess = $this->authAccessRepository->refreshToken($data['token'], $data['refresh_token']);
 
-        return $newAuthAccess->toArray();
+        return new JsonResponse($newAuthAccess->toArray());
     }
 
     public function logout(Request $request)
     {
-        return [
+        return new JsonResponse([
             'success' => (bool)$this->authAccessRepository->removeByToken($request->bearerToken())
-        ];
+        ]);
     }
 }
