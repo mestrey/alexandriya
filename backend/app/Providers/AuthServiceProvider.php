@@ -10,6 +10,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    public function boot()
+    {
+    }
+
     public function register()
     {
         $this->app->singleton(AuthAccessServiceInterface::class, function () {
@@ -22,9 +26,5 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(AuthAccessRepositoryInterface::class, AuthAccessRepository::class);
-    }
-
-    public function boot()
-    {
     }
 }

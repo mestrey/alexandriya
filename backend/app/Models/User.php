@@ -12,6 +12,10 @@ class User extends Model
         'password',
     ];
 
+    protected $hidden = [
+        'password',
+    ];
+
     public function getId()
     {
         return $this->attributes['id'];
