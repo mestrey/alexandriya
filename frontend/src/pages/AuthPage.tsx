@@ -30,11 +30,9 @@ const AuthPage: Component = (props: any) => {
         if (response.ok) {
             const tokens = await response.text();
             AuthenticationService.setTokens(JSON.parse(tokens));
-
             window.location.href = '/';
         } else {
             const errorResponse: any = await response.json();
-
             setError(`Error code ${errorResponse.error.code}: ${errorResponse.error.message}`)
         }
     };

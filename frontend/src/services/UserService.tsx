@@ -1,12 +1,13 @@
 import AuthenticationService from './AuthenticationService';
 import HttpClientService from './HttpClientService';
+import SecurityService from './SecurityService';
 
 class UserService {
-    public getUserData(): Promise<Response> {
-        return HttpClientService.get(
+    public getUserData() {
+        return SecurityService.handle(() => HttpClientService.get(
             ['user', 'show'],
             AuthenticationService.getTokens().token
-        );
+        ));
     }
 }
 

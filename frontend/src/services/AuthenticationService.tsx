@@ -37,6 +37,10 @@ class AuthenticationService {
         HttpClientService.get(['auth', 'logout'], this.getTokens().token);
         localStorage.removeItem(this.authSaveKey);
     }
+
+    public refresh(): Promise<Response> {
+        return HttpClientService.post(['auth', 'refresh'], this.getTokens());
+    }
 }
 
 export default new AuthenticationService(AUTH_SAVE_KEY);
