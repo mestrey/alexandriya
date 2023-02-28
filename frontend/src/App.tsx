@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from '@solidjs/router';
 import type { Component } from 'solid-js';
+import FooterComponent from './components/FooterComponent';
 import Guest from './components/GuestComponent';
+import NavbarComponent from './components/NavbarComponent';
 import Protected from './components/ProtectedComponent';
 import AccountPage from './pages/AccountPage';
 import AuthPage, { AuthType } from './pages/AuthPage';
@@ -12,6 +14,8 @@ import AuthenticationService from './services/AuthenticationService';
 const App: Component = () => {
     return (
         <div>
+            <NavbarComponent />
+
             <Routes>
                 <Route path='*' element={<NotFoundPage />}></Route>
                 <Route path='/' element={<HomePage />}></Route>
@@ -32,6 +36,8 @@ const App: Component = () => {
                     <Route path='search' element={<SearchPage />}></Route>
                 </Route>
             </Routes>
+
+            <FooterComponent />
         </div >
     );
 };
