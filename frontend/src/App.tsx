@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from '@solidjs/router';
 import type { Component } from 'solid-js';
 import Guest from './components/GuestComponent';
 import Protected from './components/ProtectedComponent';
+import AccountPage from './pages/AccountPage';
 import AuthPage, { AuthType } from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -25,6 +26,8 @@ const App: Component = () => {
 
                         return '/';
                     }} />}></Route>
+
+                    <Route path='account' element={<AccountPage />}></Route>
                 </Route>
             </Routes>
         </div >

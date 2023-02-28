@@ -9,7 +9,7 @@ const HomePage: Component = () => {
 
     if (isLogged) {
         UserService.getUserData().then((response) => response!.json().then((data: any) => {
-            setUsername(data.username)
+            setUsername(data.username);
         }));
     }
 
