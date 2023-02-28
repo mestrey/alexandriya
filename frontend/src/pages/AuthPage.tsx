@@ -68,8 +68,8 @@ const AuthPage: Component = (props: any) => {
                     <p>{getError()}</p>
                 </div>
                 <div>
-                    <button type="submit">
-                        <Show when={isLogin} fallback="Register">Login</Show>
+                    <button type='submit'>
+                        <Show when={isLogin} fallback='Register'>Login</Show>
                     </button>
                 </div>
             </form>

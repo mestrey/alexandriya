@@ -23,10 +23,10 @@ const HomePage: Component = () => {
             <div>
                 <Show when={isLogged}>
                     <p>search</p>
-                    <input type="text" />
+                    <input type='text' />
                 </Show>
                 <Show when={!isLogged}>
-                    <a href="login">login</a>
+                    <a href='login'>login</a>
                 </Show>
             </div>
             <div>

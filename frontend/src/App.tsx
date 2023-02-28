@@ -6,6 +6,7 @@ import AccountPage from './pages/AccountPage';
 import AuthPage, { AuthType } from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import SearchPage from './pages/SearchPage';
 import AuthenticationService from './services/AuthenticationService';
 
 const App: Component = () => {
@@ -21,13 +22,14 @@ const App: Component = () => {
                 </Route>
 
                 <Route path='' component={Protected}>
-                    <Route path='/logout' element={<Navigate href={({ }) => {
+                    <Route path='logout' element={<Navigate href={({ }) => {
                         AuthenticationService.logout();
 
                         return '/';
                     }} />}></Route>
 
                     <Route path='account' element={<AccountPage />}></Route>
+                    <Route path='search' element={<SearchPage />}></Route>
                 </Route>
             </Routes>
         </div >

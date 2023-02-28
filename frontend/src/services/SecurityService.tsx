@@ -1,4 +1,4 @@
-import AuthenticationService from "./AuthenticationService";
+import AuthenticationService from './AuthenticationService';
 
 class SecurityService {
     private readonly EXPIRED_TOKEN_CODE = 498;

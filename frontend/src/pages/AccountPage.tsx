@@ -1,5 +1,5 @@
-import { Component, createSignal } from "solid-js";
-import UserService from "../services/UserService";
+import { Component, createSignal } from 'solid-js';
+import UserService from '../services/UserService';
 
 const AccountPage: Component = () => {
     const [getUserData, setUserData] = createSignal();
