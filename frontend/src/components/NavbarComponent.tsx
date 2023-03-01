@@ -14,9 +14,9 @@ const NavbarComponent: Component = () => {
     }
 
     return (
-        <nav class='navbar navbar-expand-sm navbar-dark bg-primary mb-2 p-2'>
+        <nav class='navbar navbar-expand-sm navbar-dark bg-primary p-2'>
             <div class='container-fluid'>
-                <a class='navbar-brand' href='/'>Alexandriya</a>
+                <a class='navbar-brand' href='/'><strong>🍿 Alexandriya</strong></a>
                 <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
                     <span class='navbar-toggler-icon'></span>
                 </button>

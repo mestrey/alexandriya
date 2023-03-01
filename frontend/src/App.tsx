@@ -28,8 +28,9 @@ const App: Component = () => {
                 <Route path='' component={Protected}>
                     <Route path='logout' element={<Navigate href={({ }) => {
                         AuthenticationService.logout();
+                        window.location.href = '/';
 
-                        return '/';
+                        return '';
                     }} />}></Route>
 
                     <Route path='account' element={<AccountPage />}></Route>
