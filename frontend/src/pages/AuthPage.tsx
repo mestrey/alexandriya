@@ -39,40 +39,64 @@ const AuthPage: Component = (props: any) => {
 
 
     return (
-        <div>
-            <form onsubmit={formSubmit}>
-                <div>
-                    <label for='username'>Username:</label>
-                    <input
-                        type='text' id='username' value={getUsername()}
-                        onChange={(e) => setUsername(e.currentTarget.value)}
-                    />
-                </div>
-                <Show when={!isLogin}>
-                    <div>
-                        <label for='email'>Email:</label>
-                        <input
-                            type='email' id='email' value={getEmail()}
-                            onChange={(e) => setEmail(e.currentTarget.value)}
-                        />
+        <div class='text-left container'>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class='text-center'>
+                        <h1 class='p-4'>
+                            <strong>
+                                {isLogin ? 'Login' : 'Register'}
+                            </strong>
+                        </h1>
                     </div>
-                </Show>
-                <div>
-                    <label for='password'>Password:</label>
-                    <input
-                        type='password' id='password' value={getPassword()}
-                        onChange={(e) => setPassword(e.currentTarget.value)}
-                    />
+                    <form onsubmit={formSubmit}>
+                        <div class='mb-3'>
+                            <label for='username' class='form-label'>Username</label>
+                            <input type='text' class='form-control' id='username' aria-describedby='usernameInfo'
+                                value={getUsername()} onChange={(e) => setUsername(e.currentTarget.value)}
+                            />
+                            <div id='usernameInfo' class='form-text'>
+                                Your username must be 2-30 characters long and unique.
+                            </div>
+                        </div>
+                        <Show when={!isLogin}>
+                            <div class='mb-3'>
+                                <label for='email' class='form-label'>Email address</label>
+                                <input type='email' class='form-control' id='email' aria-describedby='emailInfo'
+                                    value={getEmail()} onChange={(e) => setEmail(e.currentTarget.value)}
+                                />
+                                <div id='emailInfo' class='form-text'>
+                                    We'll never share your email with anyone else.
+                                </div>
+                            </div>
+                        </Show>
+                        <div class='mb-3'>
+                            <label for='password' class='form-label'>Password</label>
+                            <input type='password' class='form-control' id='password' aria-describedby='passwordInfo'
+                                value={getPassword()} onChange={(e) => setPassword(e.currentTarget.value)}
+                            />
+                            <div id='passwordInfo' class='form-text'>
+                                Your password must be 6 characters long minimum.
+                            </div>
+                        </div>
+                        <div class='text-center text-danger'>
+                            <p>{getError()}</p>
+                        </div>
+                        <div class='text-center'>
+                            <button type='submit' class='btn btn-primary'>
+                                {isLogin ? 'Login' : 'Register'}
+                            </button>
+                            <p class='pt-3'>
+                                <a href={isLogin ? 'register' : 'login'}>
+                                    {isLogin ? 'Register' : 'Login'} instead?
+                                </a>
+                            </p>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <p>{getError()}</p>
-                </div>
-                <div>
-                    <button type='submit'>
-                        <Show when={isLogin} fallback='Register'>Login</Show>
-                    </button>
-                </div>
-            </form>
+                <div class="col-3"></div>
+            </div>
         </div>
     );
 };
