@@ -34,7 +34,7 @@ const HomePage: Component = () => {
                                 <form onsubmit={formSubmit}>
                                     <div class='row'>
                                         <div class='col-10'>
-                                            <input type='password' id='inputPassword6' class='form-control' placeholder='Name of a movie...'
+                                            <input type='text' id='searchQueryInput' class='form-control' placeholder='Name of a movie...'
                                                 value={getSearchQuery()} onChange={(e) => setSearchQuery(e.currentTarget.value)}
                                             />
                                         </div>
@@ -53,7 +53,7 @@ const HomePage: Component = () => {
                 </div>
             </section>
             <section>
-
+                ...
             </section>
         </div>
     );
