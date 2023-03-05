@@ -1,18 +1,9 @@
 import { Component, createSignal, Show } from 'solid-js';
+import SearchBarComponent from '../components/SearchBarComponent';
 import AuthenticationService from '../services/AuthenticationService';
 
 const HomePage: Component = () => {
     const isLogged = AuthenticationService.isLogged();
-
-    const [getSearchQuery, setSearchQuery] = createSignal('');
-
-    const formSubmit = (event: Event) => {
-        event.preventDefault();
-
-        if (getSearchQuery()) {
-            window.location.href = `search?q=${encodeURI(getSearchQuery())}`;
-        }
-    };
 
     return (
         <div>
@@ -31,18 +22,7 @@ const HomePage: Component = () => {
                         <div class='col-md-6 text-center'>
                             <Show when={isLogged}>
                                 <h4>Search</h4>
-                                <form onsubmit={formSubmit}>
-                                    <div class='row'>
-                                        <div class='col-10'>
-                                            <input type='text' id='searchQueryInput' class='form-control' placeholder='Name of a movie...'
-                                                value={getSearchQuery()} onChange={(e) => setSearchQuery(e.currentTarget.value)}
-                                            />
-                                        </div>
-                                        <div class='col-1'>
-                                            <button type='submit' class='btn btn-primary'>GO</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <SearchBarComponent />
                             </Show>
                             <Show when={!isLogged}>
                                 Please <a href='login'>login</a> for making search!
